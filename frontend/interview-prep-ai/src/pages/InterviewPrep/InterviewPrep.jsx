@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import moment from "moment";
 import { AnimatePresence, motion } from "framer-motion";
-import { LuCircleAlert, LuListCollapse } from "react-icons/lu";
+import { LuCircleAlert, LuListCollapse,LuMic } from "react-icons/lu";
 import SpinnerLoader from "../../components/Loader/SpinnerLoader";
 import { toast } from "react-hot-toast";
 import DashboardLayout from "../../components/layouts/DashboardLayout";
@@ -25,6 +25,7 @@ const InterviewPrep = () => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [isUpdateLoader, setIsUpdateLoader] = useState(false);
+    const navigate = useNavigate();
 
   // Fetch session data by session id
   const fetchSessionDetailsById = async () => {
@@ -150,7 +151,13 @@ const InterviewPrep = () => {
             : ""
         }
       />
-
+      <button 
+  onClick={() => navigate(`/agent/${sessionId}`)} 
+  className="flex items-center gap-3 bg-black text-white px-6 py-3 rounded-full font-semibold hover:bg-gray-800 transition-all"
+>
+  <LuMic className="text-xl" />
+  Start Voice Interview
+</button>
       <div className="container mx-auto pt-4 pb-4 px-4 md:px-0">
         <h2 className="text-lg font-semibold color-black">Interview Q & A</h2>
 

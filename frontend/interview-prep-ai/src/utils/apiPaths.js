@@ -1,4 +1,4 @@
-export const BASE_URL = "http://localhost:8000";
+export const BASE_URL = import.meta.env.VITE_API_URL;
 
 export const API_PATHS = {
   AUTH: {
@@ -21,6 +21,11 @@ export const API_PATHS = {
     GET_ALL: "/api/sessions/my-sessions", //  Get all user sessions
     GET_ONE: (id) => `/api/sessions/${id}`, // Get session details with questions
     DELETE: (id) => `/api/sessions/${id}`, // Delete a session
+    UPDATE: (sessionId) => `/api/sessions/${sessionId}`,
+    // ✅ FIXED: Added /api prefix to these three routes
+    SAVE_ANSWER: '/api/sessions/save-answer',
+    SAVE_TRANSCRIPT: '/api/sessions/save-transcript',
+    GET_ANSWERS: (sessionId) => `/api/sessions/${sessionId}/answers`,
   },
 
   QUESTION: {
