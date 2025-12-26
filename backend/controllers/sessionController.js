@@ -6,9 +6,15 @@ const Question = require("../models/Question");
 // @access  Private
 exports.createSession = async (req, res) => {
   try {
-    const { role, experience, topicsToFocus, description, questions } =
-      req.body;
-    const userId = req.user._id; // Assuming you have a middleware setting req.user
+    const { role, experience, topicsToFocus, description } = req.body;
+    let { questions } = req.body; // Make questions mutable
+    const userId = req.user._id;
+
+    // Ensure questions is an array
+    if (!Array.isArray(questions)) {
+      console.warn("`questions` received is not an array. Initializing as empty array.");
+      questions = [];
+    }
 
     const session = await Session.create({
       user: userId,
@@ -22,8 +28,8 @@ exports.createSession = async (req, res) => {
       questions.map(async (q) => {
         const question = await Question.create({
           session: session._id,
-          question: q.question,
-          answer: q.answer,
+          question: q.question || "", // Ensure question property exists
+          answer: q.answer || "", // Ensure answer property exists
         });
         return question._id;
       })
@@ -34,6 +40,7 @@ exports.createSession = async (req, res) => {
 
     res.status(201).json({ success: true, session });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ success: false, message: "Server Error" });
   }
 };

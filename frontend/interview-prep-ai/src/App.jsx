@@ -6,6 +6,7 @@ import LandingPage from "./pages/LandingPage";
 import Dashboard from "./pages/Home/Dashboard";
 import InterviewPrep from "./pages/InterviewPrep/InterviewPrep";
 import UserProvider from "./context/userContext";
+import Agent from "./pages/Agent";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
               path="/interview-prep/:sessionId"
               element={<InterviewPrep />}
             />
+           <Route path="/agent/:sessionId" element={<Agent />} />
           </Routes>
         </Router>
 
