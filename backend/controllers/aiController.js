@@ -138,8 +138,8 @@ const generateConceptExplanation = async (req, res) => {
 
     // Clean it: Remove ```json and ``` from beginning and end
     const cleanedText = rawText
-      .replace(/^```json\s*/, "")
-      .replace(/```$/, "")
+      .replace(/^```(?:json)?\s*/, "")
+      .replace(/```\s*\s*$/, "")
       .trim();
 
     // Now safe to parse
