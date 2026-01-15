@@ -11,6 +11,7 @@ const axiosInstance = axios.create({
 });
 
 // Request Interceptor
+//fetches jwt from localstorage and attaches to header
 axiosInstance.interceptors.request.use(
   (config) => {
     const accessToken = localStorage.getItem("token");
@@ -25,6 +26,7 @@ axiosInstance.interceptors.request.use(
 );
 
 // Response Interceptor
+
 axiosInstance.interceptors.response.use(
   (response) => {
     return response;
